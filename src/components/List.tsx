@@ -4,13 +4,18 @@ import { PostClass } from "../lib/PostClass.class";
 
 export default function List({
   list,
-  openModal,
+  modal,
 }: {
   list: Post[];
-  openModal: (arg: boolean) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  modal: any;
 }) {
   const [openImage, setOpenImage] = useState(false);
   const [src, setSrc] = useState("");
+  
+  const handleDelete = (id: number) => {
+    console.log('deleted')
+  }
 
   return (
     <>
@@ -61,7 +66,7 @@ export default function List({
               <p className="text-xs font-light">category: {post.category}</p>
             </div>
             <div className="col-span-1 flex items-stretch justify-between gap-1 h-full">
-              <button onClick={() => openModal(true)}>
+              <button onClick={() => modal.setOpen(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -77,7 +82,7 @@ export default function List({
                   />
                 </svg>
               </button>
-              <button onClick={() => openModal(true)}>
+              <button onClick={() => modal.setOpen(true)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

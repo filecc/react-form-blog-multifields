@@ -12,16 +12,22 @@ function App() {
   const [tags, setTags] = useState<string[]>([]);
   const [category, setCategory] = useState<string>("");
   const availableTags = ["drama", "war", "random", "funny", "action"];
-  const handleConfirm = () => {
-    console.log("Confirm");
-  }
+  const [modalOption, setModalOption] = useState(
+    {  
+      setOpen: setOpen,
+      title: "Confirm",  
+      content: "Are you sure?",  
+      handleConfirm: () => {},
+    });
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newPost = new PostClass({title, content, image, tags, category});
     setPosts([...posts, newPost])
+    setPost(["", "", ""]);
+    setCategory("");
+    setTags([]);
   }
-
   
 
   return (
@@ -30,6 +36,7 @@ function App() {
       <form tabIndex={1} onSubmit={handleAdd}>
         <label htmlFor="title" className="font-medium text-xs inline-block pb-2">Title</label>
         <input
+          required
           value={title}
           onChange={(e) => setPost([e.target.value, content, image])}
           name="title"
@@ -40,6 +47,7 @@ function App() {
 
         <label htmlFor="content" className="font-medium text-xs inline-block pb-2">Content</label>
         <textarea
+          required
           value={content}
           onChange={(e) => setPost([title, e.target.value, image])}
           name="content"
@@ -50,6 +58,7 @@ function App() {
 
         <label htmlFor="image" className="font-medium text-xs inline-block pb-2">Image</label>
         <input
+          required
           value={image}
           onChange={(e) => setPost([title, content, e.target.value])}
           name="image"
@@ -60,6 +69,7 @@ function App() {
 
         <label htmlFor="category" className="font-medium text-xs inline-block pb-2">Category</label>
         <select
+          required
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           name="category"
@@ -77,6 +87,7 @@ function App() {
             return   <div key={tag + 'tag-list'} className="px-2 flex items-center">
             <label htmlFor={tag} className="capitalize text-xs mr-1 font-medium">{tag}</label>
             <input 
+            checked={tags.includes(tag)}
             value={tag} 
             name={tag}
             onChange={(e) => {
@@ -96,13 +107,12 @@ function App() {
         </button>
       </form>
       <section className="h-full">
-        <List list={posts} openModal={setOpen} />
+        <List list={posts} modal={{setOpen: setOpen, setModalOption: setModalOption, setPosts: setPosts}} />
       </section>
       
       <Modal
         open={open}
-        handleCancel={() => setOpen(!open)}
-        handleConfirm={handleConfirm}
+        option={modalOption}
       />
     </section>
   );
