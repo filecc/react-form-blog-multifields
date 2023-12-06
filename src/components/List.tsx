@@ -182,7 +182,7 @@ export default function List({
         })}
       </ul>
       {openImage && (
-        <section className="absolute top-0 right-0 bottom-0 grid place-items-center bg-black/80 p-6">
+        <section className="fixed top-0 right-0 bottom-0 grid place-items-center bg-black/80 p-6">
           <div className="w-full">
             <img src={src} alt="image" />
             <button
@@ -212,22 +212,19 @@ export default function List({
         </section>
       )}
       {
-        openPostModal && <section className="absolute top-0 right-0 bottom-0 w-full grid place-items-center bg-black/80 p-6">
-          <div className="w-full">
-            <div className="bg-white rounded-xl shadow-lg w-11/12 h-fit grid place-items-center">
-              <div className="w-full h-full px-5 flex flex-col justify-between py-6 mb-12">
+        openPostModal && <section className="fixed top-0 right-0 bottom-0 w-full grid place-items-center bg-black/80 p-6">
+          <div className="container max-w-xl max-h-[80%] overflow-y-auto">
+            <div className="bg-white shadow-lg w-11/12 h-fit grid place-items-center">
+              <div className="w-full h-full px-5 flex flex-col justify-between mb-10">
                 <div className="pt-8 grid place-items-center space-y-4">
                   <h2 className="text-xl font-semibold text-center">{post?.title}</h2>
                   <img className="rounded-lg" src={post?.image} alt="post image" />
                   <p className="pt-3 font-light place-self-start">{post?.content}</p>
                 </div>
-                
-                
-                  <button className="place-self-end bg-gray-50 py-2 max-w-[150px] ml-full border px-6 rounded border-gray-200 text-gray-500 hover:bg-gray-200 hover:text-gray-600 transition-colors duration-300" onClick={() => {setPost(null)}}>Close</button>
-           
               </div>
             </div>
           </div>
+          <button className="place-self-end bg-gray-50 py-2 max-w-[150px] ml-full border px-6 rounded border-gray-200 text-gray-500 hover:bg-gray-200 hover:text-gray-600 transition-colors duration-300" onClick={() => {setPost(null)}}>Close</button>
         </section>
       }
     </>

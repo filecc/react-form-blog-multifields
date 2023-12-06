@@ -6,7 +6,7 @@ export default function Modal({ open, option }: { open: boolean, option: any}){
       }
 
     return ( <>
-    {open ? <div className="absolute top-0 bottom-0 right-0 w-full bg-gray-600/60 grid place-items-center">
+    {open ? <div className="fixed top-0 bottom-0 right-0 w-full bg-gray-600/60 grid place-items-center">
         <section className="bg-white rounded-xl shadow-lg w-11/12 h-fit grid place-items-center">
             <div className="w-full h-full px-5 flex flex-col justify-between py-6 mb-12">
                 <div className="text-center pt-8">
