@@ -7,7 +7,7 @@ export default function Modal({ open, option }: { open: boolean, option: any}){
             <div className="w-full h-full px-5 flex flex-col justify-between py-6 mb-12">
                 <div className="text-center pt-8">
                     <h2 className="text-xl font-semibold">{option.title}</h2>
-                    <p className="pt-3 font-light">{option.content}</p>
+                    <div className="pt-3 font-light">{option.content}</div>
                 </div>
                 
                 <div className="grid grid-cols-3 space-x-2">

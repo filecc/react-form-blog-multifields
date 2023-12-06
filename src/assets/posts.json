@@ -1,8 +1,8 @@
 [
     {
         "id": "bbce5d8f",
-        "title": "The Shawshank Redemption",
-        "content": "The content of this first post.",
+        "title": "This is a test post: delete me.",
+        "content": "Delete me.",
         "image": "https://images.unsplash.com/photo-1455637350775-730a9e5a8310?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "category": "movie",
         "tags": ["movie", "drama"]

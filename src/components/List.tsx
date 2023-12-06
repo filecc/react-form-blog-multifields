@@ -15,8 +15,14 @@ export default function List({
   const handleDelete = (id: string) => {
     const newList = list.filter((item) => item.id !== id);
     modal.setPosts(newList);
+    localStorage.removeItem('posts')
+    localStorage.setItem('posts', JSON.stringify(newList))
     console.log(newList)
     modal.setOpen(false);
+  }
+
+  const handleEdit = (id: string) => {
+    console.log('ciao')
   }
 
   return (
@@ -34,7 +40,7 @@ export default function List({
                   setSrc(post.image);
                   setOpenImage(true);
                 }}
-                className="w-full h-full max-w-[80px] rounded-lg brightness-75 cursor-pointer object-cover"
+                className="w-full h-full max-w-[80px] max-h-[80px] rounded-lg brightness-75 cursor-pointer object-cover"
                 src={item.image}
                 alt={item.title + " image"}
               />
@@ -96,7 +102,21 @@ export default function List({
                   />
                 </svg>
               </button>
-              <button onClick={() => modal.setOpen(true)}>
+              <button onClick={() => {
+                modal.setOpen(true)
+                modal.setModalOption({
+                  title: 'Edit post',
+                  content: <div>
+                    Editing
+                  </div>,
+                  setOpen: modal.setOpen,
+                  handleConfirm: () => {
+                    if(post.id){
+                      handleEdit(post.id)
+                    }
+                  }
+                })
+                }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
