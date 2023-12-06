@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Post } from "../types/Post.type";
-import { PostClass } from "../lib/PostClass.class";
 
 export default function List({
   list,
@@ -13,15 +12,18 @@ export default function List({
   const [openImage, setOpenImage] = useState(false);
   const [src, setSrc] = useState("");
   
-  const handleDelete = (id: number) => {
-    console.log('deleted')
+  const handleDelete = (id: string) => {
+    const newList = list.filter((item) => item.id !== id);
+    modal.setPosts(newList);
+    console.log(newList)
+    modal.setOpen(false);
   }
 
   return (
     <>
       <ul className="mt-6 h-full">
         {list.map((item) => {
-            const post = new PostClass(item);
+            const post = item;
             return  <li
             key={post.id}
             className="grid grid-cols-6 space-x-3 h-full py-4"
@@ -62,11 +64,23 @@ export default function List({
             <div className="h-full col-span-4">
               <h5>{post.title}</h5>
               <p className="text-xs font-light">id: {post.id}</p>
-              <p className="text-xs font-light">tags: {post.getTags()}</p>
+              <p className="text-xs font-light">tags: {post.tags.join(', ')}</p>
               <p className="text-xs font-light">category: {post.category}</p>
             </div>
             <div className="col-span-1 flex items-stretch justify-between gap-1 h-full">
-              <button onClick={() => modal.setOpen(true)}>
+              <button onClick={() => {
+                modal.setOpen(true)
+                modal.setModalOption({
+                  title: 'Delete post',
+                  content: `Are you sure you want to delete ${post.title}?`,
+                  setOpen: modal.setOpen,
+                  handleConfirm: () => {
+                    if(post.id){
+                      handleDelete(post.id)
+                    }
+                  }
+                })
+                }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
