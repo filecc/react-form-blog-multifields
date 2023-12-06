@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Post } from "../types/Post.type";
+import Form from "./Form";
 
 export default function List({
   list,
@@ -21,9 +22,6 @@ export default function List({
     modal.setOpen(false);
   }
 
-  const handleEdit = (id: string) => {
-    console.log('ciao')
-  }
 
   return (
     <>
@@ -106,16 +104,9 @@ export default function List({
                 modal.setOpen(true)
                 modal.setModalOption({
                   title: 'Edit post',
-                  content: <div>
-                    Editing
-                  </div>,
+                  content: <Form posts={modal.posts} setPosts={modal.setPosts} post={item} />,
                   setOpen: modal.setOpen,
-                  handleConfirm: () => {
-                    if(post.id){
-                      handleEdit(post.id)
-                    }
-                  }
-                })
+                  handleConfirm: () => modal.setOpen(false)})
                 }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
