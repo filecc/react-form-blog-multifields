@@ -104,6 +104,7 @@ export default function List({
                 modal.setOpen(true)
                 modal.setModalOption({
                   title: 'Edit post',
+                  editing: true,
                   content: <Form posts={modal.posts} setPosts={modal.setPosts} post={item} />,
                   setOpen: modal.setOpen,
                   handleConfirm: () => modal.setOpen(false)})
